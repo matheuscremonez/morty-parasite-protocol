@@ -44,38 +44,40 @@ export default class Game {
     loadingScreen.classList.remove('hidden');
 
     try {
+      const base = import.meta.env.BASE_URL;
+
       // 1. Load Enemy Data
-      const res = await fetch('/enemyData.json');
+      const res = await fetch(`${base}enemyData.json`);
       const text = await res.text();
       // Clean `var inimigos='[...]';` to just `[...]`
       let cleanJson = text.replace("var inimigos='", "");
       if (cleanJson.endsWith("';")) cleanJson = cleanJson.slice(0, -2);
       if (cleanJson.endsWith("'")) cleanJson = cleanJson.slice(0, -1);
-      
+
       this.enemyTypes = JSON.parse(cleanJson);
 
       // 2. Queue Assets
       const promises = [
-        this.assets.loadImage('bg_sunny', '/images/cenarioSunny.png'),
-        this.assets.loadImage('morty', '/images/Morty.png'),
-        this.assets.loadImage('projetil0', '/images/projetil0.png'),
-        this.assets.loadImage('projetil1', '/images/projetil1.png'),
-        this.assets.loadImage('projetil2', '/images/projetil2.png'),
-        this.assets.loadImage('projetil3', '/images/projetil3.png'),
-        this.assets.loadImage('projetil4', '/images/projetil4.png'),
-        this.assets.loadImage('Summer', '/images/Summer.png'),
-        this.assets.loadImage('Jaguar', '/images/Jaguar.png'),
-        this.assets.loadImage('Wizard', '/images/Wizard.png'),
-        this.assets.loadImage('Pickle', '/images/Pickle.png'),
-        this.assets.loadAudio('introMusic', '/musics/intro.mp3'),
-        this.assets.loadAudio('gameMusic', '/musics/gameMusic.mp3'),
-        this.assets.loadAudio('shot', '/musics/shot.mp3'),
-        this.assets.loadAudio('pickle_rick', '/musics/pickle_rick.mp3')
+        this.assets.loadImage('bg_sunny', `${base}images/cenarioSunny.png`),
+        this.assets.loadImage('morty', `${base}images/Morty.png`),
+        this.assets.loadImage('projetil0', `${base}images/projetil0.png`),
+        this.assets.loadImage('projetil1', `${base}images/projetil1.png`),
+        this.assets.loadImage('projetil2', `${base}images/projetil2.png`),
+        this.assets.loadImage('projetil3', `${base}images/projetil3.png`),
+        this.assets.loadImage('projetil4', `${base}images/projetil4.png`),
+        this.assets.loadImage('Summer', `${base}images/Summer.png`),
+        this.assets.loadImage('Jaguar', `${base}images/Jaguar.png`),
+        this.assets.loadImage('Wizard', `${base}images/Wizard.png`),
+        this.assets.loadImage('Pickle', `${base}images/Pickle.png`),
+        this.assets.loadAudio('introMusic', `${base}musics/intro.mp3`),
+        this.assets.loadAudio('gameMusic', `${base}musics/gameMusic.mp3`),
+        this.assets.loadAudio('shot', `${base}musics/shot.mp3`),
+        this.assets.loadAudio('pickle_rick', `${base}musics/pickle_rick.mp3`)
       ];
 
       // Queue enemy images
       for (const type of this.enemyTypes) {
-        promises.push(this.assets.loadImage(type.nome, `/images/${type.nome}.png`));
+        promises.push(this.assets.loadImage(type.nome, `${base}images/${type.nome}.png`));
       }
 
       await Promise.allSettled(promises);
@@ -302,7 +304,7 @@ export default class Game {
     livesContainer.innerHTML = '';
     for (let i = 0; i < 3; i++) {
         const img = document.createElement('img');
-        img.src = '/images/vida.svg';
+        img.src = `${import.meta.env.BASE_URL}images/vida.svg`;
         img.className = 'life-icon';
         if (i >= this.lives) {
             img.classList.add('lost-life');

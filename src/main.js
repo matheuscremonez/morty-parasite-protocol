@@ -1,5 +1,7 @@
 import Game from './game/Game.js';
 
+const BASE_URL = import.meta.env.BASE_URL;
+
 document.addEventListener('DOMContentLoaded', () => {
   const canvas = document.getElementById('game-canvas');
   // Handle resize matching standard display
@@ -27,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Setup first intro screen
     storyIndex = 1;
-    storyImage.style.backgroundImage = `url('/images/intro.png')`;
+    storyImage.style.backgroundImage = `url('${BASE_URL}images/intro.png')`;
     document.getElementById('story-screen').classList.remove('hidden');
     btnStoryNext.classList.remove('hidden');
     btnStoryStart.classList.add('hidden');
@@ -64,11 +66,11 @@ document.addEventListener('DOMContentLoaded', () => {
   btnStoryNext.addEventListener('click', (e) => {
     e.target.blur();
     storyIndex++;
-    if (storyIndex === 2) storyImage.style.backgroundImage = `url('/images/intro2.png')`;
-    else if (storyIndex === 3) storyImage.style.backgroundImage = `url('/images/intro3.png')`;
-    else if (storyIndex === 4) storyImage.style.backgroundImage = `url('/images/intro4.png')`;
+    if (storyIndex === 2) storyImage.style.backgroundImage = `url('${BASE_URL}images/intro2.png')`;
+    else if (storyIndex === 3) storyImage.style.backgroundImage = `url('${BASE_URL}images/intro3.png')`;
+    else if (storyIndex === 4) storyImage.style.backgroundImage = `url('${BASE_URL}images/intro4.png')`;
     else if (storyIndex === 5) {
-      storyImage.style.backgroundImage = `url('/images/intro5.png')`;
+      storyImage.style.backgroundImage = `url('${BASE_URL}images/intro5.png')`;
       btnStoryNext.classList.add('hidden');
       btnStoryStart.classList.remove('hidden');
     }
