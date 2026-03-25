@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rick and Morty: Parasite Protocol</title>
+    <link href="https://fonts.googleapis.com/css?family=VT323" rel="stylesheet" />
+    <link rel="icon" type="image/png" href="/images/mortyIcon.png" />
+    <link rel="stylesheet" href="/src/styles/main.css" />
+  </head>
+  <body>
+    <!-- Main Game Container -->
+    <div id="game-container">
+      <canvas id="game-canvas"></canvas>
+      
+      <!-- UI Layer Overlay -->
+      <div id="ui-layer">
+        
+        <!-- Loading Screen -->
+        <div id="loading-screen" class="screen">
+          <h1 class="title">Carregando...</h1>
+        </div>
+
+        <!-- Main Menu -->
+        <div id="main-menu" class="screen hidden">
+          <h1 class="title">Rick and Morty</h1>
+          <h2 class="subtitle">Parasite Protocol</h2>
+          <div class="menu-buttons">
+            <button id="btn-start" class="btn">Jogar</button>
+          </div>
+          <div class="instructions">
+            <p>Use as Setas Cima/Baixo para mover.</p>
+            <p>Use Espaço para atirar nos parasitas!</p>
+          </div>
+        </div>
+
+        <!-- Story Intro Screen -->
+        <div id="story-screen" class="screen hidden" style="background-color: black;">
+          <div id="story-image" style="width: 75vw; height: 40vw; background-size: cover; background-position: center; border: 4px solid var(--neon-green); border-radius: 8px;"></div>
+          <div class="menu-buttons" style="margin-top: 2rem;">
+            <button id="btn-story-next" class="btn">...</button>
+            <button id="btn-story-start" class="btn hidden">Iniciar Jogo</button>
+          </div>
+        </div>
+
+        <!-- Gameplay HUD -->
+        <div id="hud" class="screen hidden">
+          <div class="hud-top">
+            <div class="stats">
+              <span id="stat-kills">Kills: 0</span>
+              <span id="stat-time">Tempo: 00:00</span>
+            </div>
+            <div id="character-unlocks">
+              <div id="char-Summer" class="char-portrait locked" data-char="Summer" title="10 Kills" style="background-image: url('/images/SummerJogavel.png')"></div>
+              <div id="char-Jaguar" class="char-portrait locked" data-char="Jaguar" title="30 Kills" style="background-image: url('/images/JaguarJogavel.png')"></div>
+              <div id="char-Wizard" class="char-portrait locked" data-char="Wizard" title="50 Kills" style="background-image: url('/images/WizardJogavel.png')"></div>
+              <div id="char-Pickle" class="char-portrait locked" data-char="Pickle" title="100 Kills" style="background-image: url('/images/PickleJogavel.png')"></div>
+            </div>
+            <div class="lives" id="lives-container">
+              <!-- Lives images will go here -->
+            </div>
+          </div>
+          
+          <!-- Virtual Mobile Controls (Visible only on touch/mobile) -->
+          <div id="mobile-controls">
+            <div class="dpad">
+              <button id="btn-up" class="touch-btn">▲</button>
+              <button id="btn-down" class="touch-btn">▼</button>
+            </div>
+            <div class="action-buttons">
+              <button id="btn-shoot" class="touch-btn">FIRE</button>
+            </div>
+          </div>
+          
+          <!-- Global Mute Button -->
+          <button id="btn-mute" class="mute-btn" title="Ligar/Desligar Som">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="24" height="24">
+              <!-- Speaker Body (Static) -->
+              <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+              <!-- Sound Waves -->
+              <g id="icon-sound-on">
+                <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+                <path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
+              </g>
+              <!-- Cross -->
+              <g id="icon-sound-off" class="hidden">
+                <line x1="23" y1="9" x2="17" y2="15"></line>
+                <line x1="17" y1="9" x2="23" y2="15"></line>
+              </g>
+            </svg>
+          </button>
+        </div>
+
+        <!-- Game Over Screen -->
+        <div id="game-over" class="screen hidden">
+          <h1 class="title">Game Over</h1>
+          <h2 class="subtitle">Os parasitas tomaram conta!</h2>
+          <p class="final-score">Kills: <span id="final-kills">0</span> | Sobrevivência: <span id="final-time">00:00</span></p>
+          <div class="menu-buttons">
+            <button id="btn-restart" class="btn">Tentar Novamente</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
